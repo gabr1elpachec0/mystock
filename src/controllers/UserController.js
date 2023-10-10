@@ -1,9 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 const formidable = require('formidable')
-const fs = require('fs')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
-const path = require('path')
 
 const prisma = new PrismaClient()
 
@@ -114,5 +112,15 @@ module.exports = {
     }
 
     res.render('cadastro', { erro_cadastro: erro_cadastro })
+  },
+
+  // User logout
+  async userLogout(req, res) {
+    if (req.session.logado === true) {
+      req.session.logado = false
+      req.session.logout = "Você se desconectou da plataforma, faça o login!"
+    }
+
+    res.redirect('home')
   }
 }
