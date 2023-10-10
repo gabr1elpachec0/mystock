@@ -1,0 +1,23 @@
+
+            <div class="mb-4" style="text-align: left;">
+                <label class="form-label">Categoria</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="1">Agro e pet</option>
+                    <option value="1">Alimentos e bebidas</option>
+                    <option value="1">Antiguidades e coleções</option>
+                    <option value="1">Arte</option>
+                    <option value="3">Automotivo</option>
+                    <option value="1">Beleza e cuidados pessoais</option>
+                    <option value="1">Brinquedos e hobbies</option>
+                    <option value="1">Calçados, roupas e bolsas</option>
+                    <option value="2">Casa e decoração</option>
+                    <option value="1">Eletrônicos</option>
+                    <option value="1">Esportes e fitness</option>
+                    <option value="1">Games</option>
+                    <option value="1">Livros, filmes e séries</option>
+                    <option value="1">Móveis</option>
+                    <option value="1">Música</option>
+                    <option value="3">Saúde e beleza</option>
+                </select>
+            </div>

@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+// Tabelas
+
+model Usuario {
+  id_us       Int      @id @default(autoincrement())
+  email       String   @unique
+  senha       String
+  nome_us     String
+
+  Estoque       Estoque[]
+}
+
+model Estoque {
+  id_es       Int      @id @default(autoincrement())
+  id_user     Int
+  nome_es     String
+
+  user Usuario @relation(fields: [id_user], references: [id_us])
+
+  Fin_estoque       Fin_estoque[]
+}
+
+model Produto {
+  id_prod     Int      @id @default(autoincrement())
+  nome_prod   String
+  categoria   String
+  id_supply   Int
+
+  supplier Fornecedor @relation(fields: [id_supply], references: [id_forn])
+
+  Movimentacao       Movimentacao[]
+  Fin_produto        Fin_produto[]
+}
+
+model Movimentacao {
+  id_mov      Int      @id @default(autoincrement())
+  id_product  Int
+  operacao    String
+  data        DateTime
+
+  product Produto @relation(fields: [id_product], references: [id_prod])
+}
+
+model Fornecedor {
+  id_forn     Int      @id @default(autoincrement())
+  nome_forn   String
+  email_forn  String   @unique
+  telefone    String
+
+  Produto       Produto[]
+}
+
+model Fin_estoque {
+  id_fin_es   Int      @id @default(autoincrement())
+  id_stock    Int
+  Valor       Float
+  Invest      Float
+  Bruto       Float
+  Liquido     Float
+
+  stock Estoque @relation(fields: [id_stock], references: [id_es])
+}
+
+model Fin_produto {
+  id_fin_prod Int      @id @default(autoincrement())
+  id_product  Int
+  Valor       Float
+  Invest      Float
+  Bruto       Float
+  Liquido     Float
+
+  fin_product Produto @relation(fields: [id_product], references: [id_prod])
+}

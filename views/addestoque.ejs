@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body>
+    <%- include('navbar-logado') %>
+        <form action="addestoque" method="post" enctype="multipart/form-data">
+            <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
+                <h4> Cadastre um Estoque </h4>
+                <br>
+            </div>
+            <div class="container mt-5">
+                <div class="form mt-5" style="padding: 2%;">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label">Nome do Estoque</label>
+                        <input type="text" id="informacao" name="nome" class="form-control">
+                    </div>
+                    <div class="d-flex mb-3" style="text-align: left;">
+                    </div>
+                    <div class="mb-4" style="text-align: left;">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-select" id="opcao" name="opcao" aria-label="Default select example">
+                            <option selected></option>
+                            <option value="1">Agro e pet</option>
+                            <option value="1">Alimentos e bebidas</option>
+                            <option value="1">Antiguidades e coleções</option>
+                            <option value="1">Arte</option>
+                            <option value="3">Automotivo</option>
+                            <option value="1">Beleza e cuidados pessoais</option>
+                            <option value="1">Brinquedos e hobbies</option>
+                            <option value="1">Calçados, roupas e bolsas</option>
+                            <option value="2">Casa e decoração</option>
+                            <option value="1">Eletrônicos</option>
+                            <option value="1">Esportes e fitness</option>
+                            <option value="1">Games</option>
+                            <option value="1">Livros, filmes e séries</option>
+                            <option value="1">Móveis</option>
+                            <option value="1">Música</option>
+                            <option value="3">Saúde e beleza</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+</body>
+</html>

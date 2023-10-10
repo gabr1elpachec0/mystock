@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body>
+    <%- include('navbar') %>
+    <form action="/login" method="post" enctype="multipart/form-data">
+        <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <h4> Login </h4>
+            <% if(sucesso) { %>
+                <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                    <p>
+                        <%= sucesso %>
+                    </p>
+                </div>
+            <% } %>
+            <% if(erro_login) { %>
+                <div class="alert alert-danger mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                    <p>
+                        <%= erro_login %>
+                    </p>
+                </div>
+            <% } %>
+            <% if(login_warning) { %>
+                <div class="alert alert-danger mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                    <p>
+                        <%= login_warning %>
+                    </p>
+                </div>
+            <% } %>
+        </div>
+        <div class="form" style="padding: 2%;">
+            <div class="mb-3" style="text-align: left;">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-4" style="text-align: left;">
+                <label for="exampleInputPassword1" class="form-label">Senha</label>
+                <input type="password" name="senha" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Entrar</button>
+        </div>
+    </form>
+</body>
+</html>

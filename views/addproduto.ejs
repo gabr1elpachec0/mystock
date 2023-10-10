@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body>
+    <%- include('navbar-logado') %>
+        <form>
+            <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
+                <% if(forn_success) { %>
+                    <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                        <p>
+                            <%= forn_success %>
+                        </p>
+                    </div>
+                <% } %>
+                <h4> Adicione um Produto </h4>
+                <br>
+            </div>
+            <div class="container mt-5">
+                <div class="form mt-5" style="padding: 2%;">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label">Nome do Produto</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="d-flex mb-3" style="text-align: left;">
+                        <div style="float: left; margin-right: 5%; width: 50%;">
+                            <label class="form-label">Custo (em R$)</label>
+                            <input type="number" class="form-control" data-type="currency">
+                        </div>
+                        <div style="float: right; margin-left: 5%; width: 50%;">
+                            <label class="form-label">Valor de Venda (em R$)</label>
+                            <input type="number" class="form-control" data-type="currency">
+                        </div>
+                    </div>
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected></option>
+                            <option value="1">Agro e pet</option>
+                            <option value="1">Alimentos e bebidas</option>
+                            <option value="1">Antiguidades e coleções</option>
+                            <option value="1">Arte</option>
+                            <option value="3">Automotivo</option>
+                            <option value="1">Beleza e cuidados pessoais</option>
+                            <option value="1">Brinquedos e hobbies</option>
+                            <option value="1">Calçados, roupas e bolsas</option>
+                            <option value="2">Casa e decoração</option>
+                            <option value="1">Eletrônicos</option>
+                            <option value="1">Esportes e fitness</option>
+                            <option value="1">Games</option>
+                            <option value="1">Livros, filmes e séries</option>
+                            <option value="1">Móveis</option>
+                            <option value="1">Música</option>
+                            <option value="3">Saúde e beleza</option>
+                        </select>
+                    </div>
+                    <div class="d-flex mb-3" style="text-align: left;">
+                        <div style="float: left; margin-right: 5%; width: 50%;">
+                            <label class="form-label">Fornecedor</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                            </select>
+                        </div>
+                        <div style="text-align: center; float: center; margin-left: 5%; width: 50%; margin-top: 6%;">
+                            <a class="fw-bold" aria-current="page" href="/addforn" style="color: black; text-decoration:none;">
+                                Cadastrar um novo fonecedor
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-4" style="text-align: left;">
+                        <label for="formFile" class="form-label">Adicione uma foto</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Adicionar</button>
+                </div>
+            </div>
+        </form>
+</body>
+</html>

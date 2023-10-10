@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body>
+    <%- include('navbar') %>
+    <form action="cadastro" method="post" enctype="multipart/form-data">
+        <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <h4> Cadastro </h4>
+            <% if(erro_cadastro) { %>
+                <div class="alert alert-danger mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                    <p>
+                        <%= erro_cadastro %>
+                    </p>
+                </div>
+            <% } %>
+        </div>
+        <div class="form mt-5" style="padding: 2%;">
+            <div class="mb-3" style="text-align: left;">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3" style="text-align: left;">
+                <label for="exampleInputPassword1" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha">
+            </div>
+            <div class="mb-4" style="text-align: left;">
+                <label class="form-label">Nome de Usuário</label>
+                <input type="text" class="form-control" id="nome" name="nome">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Cadastrar</button>
+        </div>
+    </form>
+</body>
+</html>

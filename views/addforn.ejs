@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body>
+    <%- include('navbar') %>
+    <form action="addforn" method="post" enctype="multipart/form-data">
+        <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <% if(forn_error) { %>
+                    <div class="alert alert-danger mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                        <p>
+                            <%= forn_error %>
+                        </p>
+                    </div>
+                <% } %>
+            <h4> Cadastro de Fornecedor </h4>
+        </div>
+            <div class="form" style="padding: 2%;">
+                <div class="mb-3" style="text-align: left;">
+                    <label class="form-label">Fornecedor</label>
+                    <input type="text" class="form-control" name="fornname">
+                </div>
+                <div class="d-flex mb-4" style="text-align: left;">
+                    <div style="float: left; margin-right: 5%; width: 50%;">
+                        <label class="form-label">E-mail</label>
+                        <input type="email" class="form-control" name="fornemail">
+                    </div>
+                    <div style="float: right; margin-left: 5%; width: 50%;">
+                        <label class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" name="forntel">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Cadastrar</button>
+            </div>
+    </form>
+</body>
+</html>
