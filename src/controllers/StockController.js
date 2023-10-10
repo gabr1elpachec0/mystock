@@ -72,21 +72,4 @@ module.exports = {
       res.redirect('/estoques')
     });
   },
-
-  // Get Stock By Id
-  async getStock(req, res) {
-    var stockId = parseInt(req.params.id)
-    const findStockById = await prisma.estoque.findUnique({
-      where: {
-        id_es: stockId
-      }
-    })
-
-    console.log(stockId)
-    console.log(findStockById)
-
-    res.render('modelo', {
-      nome_estoque: findStockById.nome_es,
-    })
-  }
 }

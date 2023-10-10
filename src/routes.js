@@ -3,6 +3,7 @@ const { Router } = require('express')
 const HomeController = require('./controllers/HomeController')
 const UserController = require('./controllers/UserController')
 const StockController = require('./controllers/StockController')
+const ProductController = require('./controllers/ProductController')
 
 const router = Router()
 
@@ -19,9 +20,10 @@ router.post('/login', UserController.loginUser)
 // Stock routes
 router.get('/paginaEstoque', StockController.getStockPage)
 router.get('/estoques', StockController.getStocks)
-router.get('/estoque/:id', StockController.getStock)
 router.get('/addEstoque', StockController.getStockCreateForm)
 router.post('/estoque', StockController.createStock)
 
+// Product routes
+router.get('/produtos/:id', ProductController.getProductsByStockId)
 
 module.exports = router

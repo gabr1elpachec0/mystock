@@ -2,6 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const formidable = require('formidable')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const prisma = new PrismaClient()
 

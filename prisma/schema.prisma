@@ -24,7 +24,7 @@ model Usuario {
 model Estoque {
   id_es   Int    @id @default(autoincrement())
   id_user Int
-  nome_es String
+  nome_es String @unique
 
   user Usuario @relation(fields: [id_user], references: [id_us])
 
