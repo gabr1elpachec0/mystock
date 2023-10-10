@@ -7,19 +7,16 @@
 <body style="margin-bottom: 5%;">
     <%- include('navbar-logado') %>
     <div class="container mt-5" style="margin-right: auto; margin-left: auto;">
-        <% estoque.forEach(function (estoque) { %>
-            <div class="d-flex flex-row mx-3">
-                <h3 class="fw-bold"> <%= estoque.nome_es %> </h3>
-                <a class="fw-bold" aria-current="page" href="/addproduto" style="color: black; margin-left: auto;">
-                    <button type="button" class="btn btn-dark" style="background-color: black;">Adicionar Produto</button>
-                </a>
+        <div class="d-flex flex-row mx-3">
+            <h3 class="fw-bold"> <%= nome_estoque %> </h3>
+            <a class="fw-bold" aria-current="page" href="/addproduto" style="color: black; margin-left: auto;">
+                <button type="button" class="btn btn-dark" style="background-color: black;">Adicionar Produto</button>
+            </a>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
             </div>
-            <div class="container mt-5">
-                <div class="row">
-                </div>
-            </div>      
-        <% }) %>
-        
+        </div>      
     </div>
 </body>
 <footer>

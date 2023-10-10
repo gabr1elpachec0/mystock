@@ -85,6 +85,8 @@ module.exports = {
     console.log(stockId)
     console.log(findStockById)
 
-    res.render('modelo', { estoque: [findStockById] })
+    res.render('modelo', {
+      nome_estoque: findStockById.nome_es,
+    })
   }
 }
