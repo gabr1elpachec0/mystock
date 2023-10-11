@@ -18,10 +18,23 @@ module.exports = {
   // Get Stocks
   async getStocks(req, res) {
     var estoque_success
+    var forn_success
+    var product_success
+
 
     if (req.session.estoque_success) {
       estoque_success = req.session.estoque_success
       req.session.estoque_success = ""
+    }
+
+    if (req.session.forn_success) {
+      forn_success = req.session.forn_success
+      req.session.forn_success = ""
+    }
+
+    if (req.session.product_success) {
+      product_success = req.session.product_success
+      req.session.product_success = ""
     }
 
     if (req.session.logado === true) {
@@ -30,7 +43,9 @@ module.exports = {
       res.render('estoques',
         {
           estoques: estoque,
-          estoque_success: estoque_success
+          estoque_success: estoque_success,
+          forn_success: forn_success,
+          product_success: product_success
         });
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -39,7 +54,7 @@ module.exports = {
   },
 
   // Get Stock Create Form
-  async getStockCreateForm(req, res) {
+  async getCreateStockForm(req, res) {
     if (req.session.logado === true) {
       // const userName = req.session.userName
       // console.log(userId)

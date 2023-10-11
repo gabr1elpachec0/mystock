@@ -6,23 +6,17 @@
 </head>
 <body>
     <%- include('navbar-logado') %>
-        <form>
+        <form method="post" action="/addProduto/" enctype="multipart/form-data">
             <div class="container mt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
-                <% if(forn_success) { %>
-                    <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
-                        <p>
-                            <%= forn_success %>
-                        </p>
-                    </div>
-                <% } %>
                 <h4> Adicione um Produto </h4>
                 <br>
             </div>
             <div class="container mt-5">
                 <div class="form mt-5" style="padding: 2%;">
+                    <input type="hidden" name="estoque" value="<%= id_estoque %>">
                     <div class="mb-3" style="text-align: left;">
                         <label class="form-label">Nome do Produto</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="nome" class="form-control">
                     </div>
                     <div class="d-flex mb-3" style="text-align: left;">
                         <div style="float: left; margin-right: 5%; width: 50%;">
@@ -36,35 +30,38 @@
                     </div>
                     <div class="mb-3" style="text-align: left;">
                         <label class="form-label">Categoria</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="categoria">
                             <option selected></option>
-                            <option value="1">Agro e pet</option>
-                            <option value="1">Alimentos e bebidas</option>
-                            <option value="1">Antiguidades e coleções</option>
-                            <option value="1">Arte</option>
-                            <option value="3">Automotivo</option>
-                            <option value="1">Beleza e cuidados pessoais</option>
-                            <option value="1">Brinquedos e hobbies</option>
-                            <option value="1">Calçados, roupas e bolsas</option>
-                            <option value="2">Casa e decoração</option>
-                            <option value="1">Eletrônicos</option>
-                            <option value="1">Esportes e fitness</option>
-                            <option value="1">Games</option>
-                            <option value="1">Livros, filmes e séries</option>
-                            <option value="1">Móveis</option>
-                            <option value="1">Música</option>
-                            <option value="3">Saúde e beleza</option>
+                            <option value="Agro e pet">Agro e pet</option>
+                            <option value="Alimentos e bebidas">Alimentos e bebidas</option>
+                            <option value="Antiguidades e coleções">Antiguidades e coleções</option>
+                            <option value="Arte">Arte</option>
+                            <option value="Automotivo">Automotivo</option>
+                            <option value="Beleza e cuidados pessoais">Beleza e cuidados pessoais</option>
+                            <option value="Brinquedos e hobbies">Brinquedos e hobbies</option>
+                            <option value="Calçados, roupas e bolsas">Calçados, roupas e bolsas</option>
+                            <option value="Casa e decoração">Casa e decoração</option>
+                            <option value="Eletrônicos">Eletrônicos</option>
+                            <option value="Esportes e fitness">Esportes e fitness</option>
+                            <option value="Games">Games</option>
+                            <option value="Livros, filmes e séries">Livros, filmes e séries</option>
+                            <option value="Móveis">Móveis</option>
+                            <option value="Música">Música</option>
+                            <option value="Saúde e beleza">Saúde e beleza</option>
                         </select>
                     </div>
                     <div class="d-flex mb-3" style="text-align: left;">
                         <div style="float: left; margin-right: 5%; width: 50%;">
                             <label class="form-label">Fornecedor</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
+                            
+                            <select class="form-select" aria-label="Default select example" name="fornecedor">
+                                <% suppliers.forEach(function (supplier) { %>
+                                    <option value="<%= supplier.id_forn %>"><%= supplier.nome_forn %></option>
+                                <% }) %>
                             </select>
                         </div>
                         <div style="text-align: center; float: center; margin-left: 5%; width: 50%; margin-top: 6%;">
-                            <a class="fw-bold" aria-current="page" href="/addforn" style="color: black; text-decoration:none;">
+                            <a class="fw-bold" aria-current="page" href="/addForn" style="color: black; text-decoration:none;">
                                 Cadastrar um novo fonecedor
                             </a>
                         </div>

@@ -4,6 +4,7 @@ const HomeController = require('./controllers/HomeController')
 const UserController = require('./controllers/UserController')
 const StockController = require('./controllers/StockController')
 const ProductController = require('./controllers/ProductController')
+const SupplierController = require('./controllers/SupplierController')
 
 const router = Router()
 
@@ -20,12 +21,18 @@ router.post('/login', UserController.loginUser)
 // Stock routes
 router.get('/paginaEstoque', StockController.getStockPage)
 router.get('/estoques', StockController.getStocks)
-router.get('/addEstoque', StockController.getStockCreateForm)
+router.get('/addEstoque', StockController.getCreateStockForm)
 router.post('/estoque', StockController.createStock)
 router.get('/editaEstoque/:id', StockController.getUpdateStockForm)
 router.post('/editaEstoque/:id', StockController.updateStock)
 
 // Product routes
 router.get('/produtos/:id', ProductController.getProductsByStockId)
+router.get('/addProduto/:id', ProductController.getCreateProductForm)
+router.post('/addProduto', ProductController.createProduct)
+
+// Supplier routes
+router.get('/addForn', SupplierController.getCreateSupplierForm)
+router.post('/addForn', SupplierController.createSupplier)
 
 module.exports = router
