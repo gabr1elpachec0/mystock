@@ -39,6 +39,7 @@ model Produto {
   categoria  String
   quantidade Int    @default(0)
   valor      Float
+  custo      Float
   imagem     String
   id_supply  Int
 

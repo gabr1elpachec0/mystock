@@ -21,12 +21,16 @@
                     <div class="d-flex mb-3" style="text-align: left;">
                         <div style="float: left; margin-right: 5%; width: 50%;">
                             <label class="form-label">Custo (em R$)</label>
-                            <input type="number" class="form-control" data-type="currency">
+                            <input type="number" name="custo" class="form-control" data-type="currency">
                         </div>
                         <div style="float: right; margin-left: 5%; width: 50%;">
                             <label class="form-label">Valor de Venda (em R$)</label>
-                            <input type="number" class="form-control" data-type="currency">
+                            <input type="number" name="valor" class="form-control" data-type="currency">
                         </div>
+                    </div>
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label">Quantidade do Produto</label>
+                        <input type="number" name="quantidade" class="form-control">
                     </div>
                     <div class="mb-3" style="text-align: left;">
                         <label class="form-label">Categoria</label>
@@ -68,7 +72,7 @@
                     </div>
                     <div class="mb-4" style="text-align: left;">
                         <label for="formFile" class="form-label">Adicione uma foto</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" name="imagem" type="file" id="formFile">
                     </div>
                     <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Adicionar</button>
                 </div>

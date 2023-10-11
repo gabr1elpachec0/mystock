@@ -20,7 +20,7 @@ module.exports = {
     var estoque_success
     var forn_success
     var product_success
-
+    var product_update
 
     if (req.session.estoque_success) {
       estoque_success = req.session.estoque_success
@@ -37,6 +37,11 @@ module.exports = {
       req.session.product_success = ""
     }
 
+    if (req.session.product_update) {
+      product_update = req.session.product_update
+      req.session.product_update = ""
+    }
+
     if (req.session.logado === true) {
       const estoque = await prisma.estoque.findMany();
       // console.log(estoque)
@@ -45,7 +50,8 @@ module.exports = {
           estoques: estoque,
           estoque_success: estoque_success,
           forn_success: forn_success,
-          product_success: product_success
+          product_success: product_success,
+          product_update: product_update
         });
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"

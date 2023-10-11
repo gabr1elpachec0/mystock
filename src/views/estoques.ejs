@@ -28,7 +28,14 @@
                 </p>
             </div>
         <% } %>
-            <br>
+        <% if(product_update) { %>
+            <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                <p>
+                    <%= product_update %>
+                </p>
+            </div>
+        <% } %>
+        <br>
         <div class="d-flex flex-row mx-3">
             <h3 class="fw-bold">Meus estoques</h3>
             <a class="fw-bold" aria-current="page" href="/addEstoque" style="color: black; margin-left: auto;">
