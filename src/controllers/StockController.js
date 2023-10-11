@@ -82,7 +82,7 @@ module.exports = {
           nome_es: nome_estoque
         },
       })
-      console.log(novoEstoque)
+      // console.log(novoEstoque)
       req.session.estoque_success = "Estoque cadastrado."
       res.redirect('/estoques')
     });

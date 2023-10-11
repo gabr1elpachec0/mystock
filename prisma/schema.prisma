@@ -33,11 +33,14 @@ model Estoque {
 }
 
 model Produto {
-  id_prod   Int    @id @default(autoincrement())
-  id_stock  Int
-  nome_prod String
-  categoria String
-  id_supply Int
+  id_prod    Int    @id @default(autoincrement())
+  id_stock   Int
+  nome_prod  String
+  categoria  String
+  quantidade Int    @default(0)
+  valor      Float
+  imagem     String
+  id_supply  Int
 
   id_stock_product Estoque    @relation(fields: [id_stock], references: [id_es])
   supplier         Fornecedor @relation(fields: [id_supply], references: [id_forn])

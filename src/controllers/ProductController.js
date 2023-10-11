@@ -85,7 +85,7 @@ module.exports = {
           categoria: categoria_produto
         },
       })
-      console.log(createProduct)
+      // console.log(createProduct)
       req.session.product_success = "Produto cadastrado."
       res.redirect('/estoques')
     })
