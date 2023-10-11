@@ -22,6 +22,8 @@ router.get('/paginaEstoque', StockController.getStockPage)
 router.get('/estoques', StockController.getStocks)
 router.get('/addEstoque', StockController.getStockCreateForm)
 router.post('/estoque', StockController.createStock)
+router.get('/editaEstoque/:id', StockController.getUpdateStockForm)
+router.post('/editaEstoque/:id', StockController.updateStock)
 
 // Product routes
 router.get('/produtos/:id', ProductController.getProductsByStockId)

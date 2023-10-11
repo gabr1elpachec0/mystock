@@ -55,10 +55,10 @@ module.exports = {
   async createStock(req, res) {
     const userId = req.session.userId
 
-    var form_estoque = new formidable.IncomingForm()
+    var form_estoque_create = new formidable.IncomingForm()
 
 
-    form_estoque.parse(req, async (err, fields, files) => {
+    form_estoque_create.parse(req, async (err, fields, files) => {
       var nome_estoque = fields['nome']
 
       const novoEstoque = await prisma.estoque.create({
@@ -72,4 +72,63 @@ module.exports = {
       res.redirect('/estoques')
     });
   },
+
+  // Get Update Stock Form
+  async getUpdateStockForm(req, res) {
+    var stockId = parseInt(req.params.id)
+
+    if (!isNaN(stockId)) {
+
+      const findStockById = await prisma.estoque.findUnique({
+        where: {
+          id_es: stockId
+        }
+      });
+      // console.log(findStockById)
+
+
+      if (findStockById) {
+        res.render('editaEstoque', {
+          id_estoque: findStockById.id_es,
+          nome_estoque: findStockById.nome_es
+        })
+      } else {
+        res.status(404).send('Estoque não encontrado');
+      }
+    } else {
+      res.status(400).send('ID de estoque inválido');
+    }
+  },
+
+  // Update Stock
+  async updateStock(req, res) {
+    const stockId = parseInt(req.params.id)
+    const userId = req.session.userId
+
+    var form_estoque_update = new formidable.IncomingForm()
+
+    if (!isNaN(stockId)) {
+      form_estoque_update.parse(req, async (err, fields, files) => {
+        var nome_estoque = fields['nome']
+
+        await prisma.estoque.update({
+          where: {
+            id_es: stockId
+          },
+          data: {
+            id_user: userId,
+            nome_es: nome_estoque
+          }
+        })
+
+        // console.log('Método iniciou')
+
+        req.session.estoque_success = "Estoque atualizado."
+        res.redirect('/estoques');
+      })
+    } else {
+      res.status(400).send('ID de estoque inválido');
+    }
+  }
+
 }

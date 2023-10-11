@@ -22,24 +22,43 @@
             </a>
         </div>
         <div class="container mt-5">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a class="fw-bold" aria-current="page" href="/paginaestoque" style="color: black; margin-left: auto; text-decoration: none;">
-                        Loja de Camisetas
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <% estoques.forEach(function(estoque) { %>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a class="fw-bold" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
-                            <%= estoque.nome_es %>
-                        </a>
-                    </li>
-                </ul>
-                <br>
-            <% }); %>
+            <table class="table ">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% estoques.forEach(function(estoque) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= estoque.id_es %>
+                            </th>
+                            <th>
+                                <a class="fw-bold" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
+                                    <%= estoque.nome_es %>
+                                </a>
+                            </th>
+                            <td>
+                                <a href="/editaEstoque/<%= estoque.id_es %>">
+                                    <button class="btn btn-dark" style="">
+                                        Editar
+                                    </button>
+                                </a>                            
+                            </td>
+                            <td>
+                                <button class="btn btn-dark" style="">
+                                    Excluir
+                                </button>
+                            </td>
+                        </tr>                    
+                        <br>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>    
     </div>
 </body>
