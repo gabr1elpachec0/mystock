@@ -48,6 +48,7 @@
                     <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Excluir</th>
                     </tr>
@@ -61,6 +62,11 @@
                             <th>
                                 <a class="fw-bold" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
                                     <%= estoque.nome_es %>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="fw-normal" aria-current="page" style="color: black; margin-left: auto; text-decoration: none;">
+                                    <%= estoque.categoria %>
                                 </a>
                             </th>
                             <td>

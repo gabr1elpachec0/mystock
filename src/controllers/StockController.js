@@ -81,11 +81,13 @@ module.exports = {
 
     form_estoque_create.parse(req, async (err, fields, files) => {
       var nome_estoque = fields['nome']
+      var categoria = fields['categoria']
 
       const novoEstoque = await prisma.estoque.create({
         data: {
           id_user: userId,
-          nome_es: nome_estoque
+          nome_es: nome_estoque,
+          categoria: categoria
         },
       })
       // console.log(novoEstoque)
@@ -111,7 +113,8 @@ module.exports = {
       if (findStockById) {
         res.render('editaEstoque', {
           id_estoque: findStockById.id_es,
-          nome_estoque: findStockById.nome_es
+          nome_estoque: findStockById.nome_es,
+          categoria: findStockById.categoria
         })
       } else {
         res.status(404).send('Estoque não encontrado');
@@ -131,6 +134,7 @@ module.exports = {
     if (!isNaN(stockId)) {
       form_estoque_update.parse(req, async (err, fields, files) => {
         var nome_estoque = fields['nome']
+        var categoria = fields['categoria']
 
         await prisma.estoque.update({
           where: {
@@ -138,7 +142,8 @@ module.exports = {
           },
           data: {
             id_user: userId,
-            nome_es: nome_estoque
+            nome_es: nome_estoque,
+            categoria: categoria
           }
         })
 

@@ -22,9 +22,10 @@ model Usuario {
 }
 
 model Estoque {
-  id_es   Int    @id @default(autoincrement())
-  id_user Int
-  nome_es String @unique
+  id_es     Int    @id @default(autoincrement())
+  id_user   Int
+  nome_es   String @unique
+  categoria String
 
   user Usuario @relation(fields: [id_user], references: [id_us])
 
@@ -36,7 +37,6 @@ model Produto {
   id_prod    Int    @id @default(autoincrement())
   id_stock   Int
   nome_prod  String
-  categoria  String
   quantidade Int    @default(0)
   valor      Float
   custo      Float

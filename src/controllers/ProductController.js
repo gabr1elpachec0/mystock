@@ -15,6 +15,9 @@ module.exports = {
         where: {
           id_stock: stockId
         },
+        include: {
+          supplier: true
+        }
       });
 
       const findStockById = await prisma.estoque.findUnique({

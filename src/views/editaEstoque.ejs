@@ -21,24 +21,24 @@
                     </div>
                     <div class="mb-4" style="text-align: left;">
                         <label class="form-label">Categoria</label>
-                        <select class="form-select" id="opcao" name="opcao" aria-label="Default select example">
+                        <select class="form-select" id="opcao" name="categoria" aria-label="Default select example">
                             <option selected></option>
-                            <option value="1">Agro e pet</option>
-                            <option value="1">Alimentos e bebidas</option>
-                            <option value="1">Antiguidades e coleções</option>
-                            <option value="1">Arte</option>
-                            <option value="3">Automotivo</option>
-                            <option value="1">Beleza e cuidados pessoais</option>
-                            <option value="1">Brinquedos e hobbies</option>
-                            <option value="1">Calçados, roupas e bolsas</option>
-                            <option value="2">Casa e decoração</option>
-                            <option value="1">Eletrônicos</option>
-                            <option value="1">Esportes e fitness</option>
-                            <option value="1">Games</option>
-                            <option value="1">Livros, filmes e séries</option>
-                            <option value="1">Móveis</option>
-                            <option value="1">Música</option>
-                            <option value="3">Saúde e beleza</option>
+                            <option value="Agro e pet" <% if(categoria === "Agro e pet") { %>selected<% } %>>Agro e pet</option>
+                            <option value="Alimentos e bebidas" <% if(categoria === "Alimentos e bebidas") { %>selected<% } %>>Alimentos e bebidas</option>
+                            <option value="Antiguidades e coleções" <% if(categoria === "Antiguidades e coleções") { %>selected<% } %>>Antiguidades e coleções</option>
+                            <option value="Arte" <% if(categoria === "Arte") { %>selected<% } %>>Arte</option>
+                            <option value="Automotivo" <% if(categoria === "Automotivo") { %>selected<% } %>>Automotivo</option>
+                            <option value="Beleza e cuidados pessoais" <% if(categoria === "Beleza e cuidados pessoais") { %>selected<% } %>>Beleza e cuidados pessoais</option>
+                            <option value="Brinquedos e hobbies" <% if(categoria === "Brinquedos e hobbies") { %>selected<% } %>>Brinquedos e hobbies</option>
+                            <option value="Calçados, roupas e bolsas" <% if(categoria === "Calçados, roupas e bolsas") { %>selected<% } %>>Calçados, roupas e bolsas</option>
+                            <option value="Casa e decoração" <% if(categoria === "Casa e decoração") { %>selected<% } %>>Casa e decoração</option>
+                            <option value="Eletrônicos" <% if(categoria === "Eletrônicos") { %>selected<% } %>>Eletrônicos</option>
+                            <option value="Esportes e fitness" <% if(categoria === "Esportes e fitness") { %>selected<% } %>>Esportes e fitness</option>
+                            <option value="Games" <% if(categoria === "Games") { %>selected<% } %>>Games</option>
+                            <option value="Livros, filmes e séries" <% if(categoria === "Livros, filmes e séries") { %>selected<% } %>>Livros, filmes e séries</option>
+                            <option value="Móveis" <% if(categoria === "Móveis") { %>selected<% } %>>Móveis</option>
+                            <option value="Música" <% if(categoria === "Música") { %>selected<% } %>>Música</option>
+                            <option value="Saúde e beleza" <% if(categoria === "Saúde e beleza") { %>selected<% } %>>Saúde e beleza</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Cadastrar</button>
