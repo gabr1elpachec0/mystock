@@ -32,7 +32,9 @@ router.get('/addProduto/:id', ProductController.getCreateProductForm)
 router.post('/addProduto', ProductController.createProduct)
 router.post('/increaseOne/:id', ProductController.increaseOne)
 router.post('/decreaseOne/:id', ProductController.decreaseOne)
-
+router.get('/editaProduto/:id', ProductController.getUpdateProductForm)
+router.post('/editaProduto/:id', ProductController.updateProduct)
+router.get('/excluiProduto/:id', ProductController.deleteProduct)
 
 // Supplier routes
 router.get('/addForn', SupplierController.getCreateSupplierForm)

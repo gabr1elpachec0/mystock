@@ -85,9 +85,6 @@ module.exports = {
       var quantidade = fields['quantidade']
       var valor = fields['valor']
       var custo = fields['custo']
-      valor = Number(valor)
-      custo = Number(custo)
-
 
       var nomeimg = ""
       if (files.imagem['originalFilename'].length != 0) {
@@ -108,8 +105,8 @@ module.exports = {
           nome_prod: nome_produto,
           categoria: categoria_produto,
           quantidade: parseInt(quantidade),
-          valor: valor,
-          custo: custo,
+          valor: parseFloat(valor),
+          custo: parseFloat(custo),
           imagem: nomeimg,
         },
       })
@@ -187,5 +184,93 @@ module.exports = {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
       res.redirect('/login')
     }
-  }
+  },
+
+  // Get Update Product Form
+  async getUpdateProductForm(req, res) {
+    const productId = parseInt(req.params.id)
+
+    if (!isNaN(productId)) {
+      const findProductById = await prisma.produto.findUnique({
+        where: {
+          id_prod: productId
+        },
+      })
+
+      const findSuppliers = await prisma.fornecedor.findMany()
+
+      res.render('editaProduto', {
+        produto: findProductById,
+        suppliers: findSuppliers
+      })
+    } else {
+      res.status(400).send('ID de produto inválido');
+    }
+  },
+
+  // Update Product
+  async updateProduct(req, res) {
+    const productId = parseInt(req.params.id)
+    var form_update_product = new formidable.IncomingForm()
+
+    if (!isNaN(productId)) {
+
+      form_update_product.parse(req, async(err, fields, files) => {
+        var nome_produto = fields['nome']
+        var custo = fields['custo']
+        var valor = fields['valor']
+        var quantidade = fields['quantidade']
+        var id_fornecedor = fields['fornecedor']
+        var id_estoque = fields['estoque']
+
+        var nomeimg = ""
+        if (files.imagem['originalFilename'].length != 0) {
+          var oldpathImg = files.imagem.filepath
+          var hashImg = crypto.createHash('md5').update(Date.now().toString()).digest('hex')
+          nomeimg = hashImg + '.' + files.imagem.mimetype.split('/')[1]
+          var newpathImg = path.join(__dirname, '../../public/produtos/', nomeimg)
+          fs.rename(oldpathImg, newpathImg, function (err) {
+            if (err) throw err
+          })
+        }
+
+        await prisma.produto.update({
+          where: {
+            id_prod: productId
+          }, 
+          data: {
+            nome_prod: nome_produto,
+            custo: parseFloat(custo),
+            valor: parseFloat(valor),
+            quantidade: parseInt(quantidade),
+            imagem: nomeimg,
+            id_stock: parseInt(id_estoque),
+            id_supply: parseInt(id_fornecedor)
+          }
+        })
+      })
+
+      req.session.product_update = "Produto atualizado."
+      res.redirect(`/estoques`)
+    } else {
+      res.status(400).send('ID de produto inválido');
+    }
+  },
+
+  // Delete Product
+  async deleteProduct(req, res) {
+    const productId = parseInt(req.params.id)
+
+    if(!isNaN(productId)) {
+      await prisma.produto.delete({
+        where: {
+          id_prod: productId
+        }
+      })
+      req.session.product_update = "Produto excluído."
+      res.redirect(`/estoques`)
+    } else {
+      res.status(400).send('ID de produto inválido');
+    } 
+  } 
 }

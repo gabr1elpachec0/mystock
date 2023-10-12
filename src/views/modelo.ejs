@@ -43,15 +43,26 @@
                     Quantidade
                     <div style="margin-left: auto; margin-right: 0">
                       <div class="d-flex">
-                        <form method="post" action="/decreaseOne/<%= produto.id_prod %>" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-dark btn-sm">-</button>
-                      </form>
-                      <p style="margin: 5px;"><%= produto.quantidade %></p>
-                      <form method="post" action="/increaseOne/<%= produto.id_prod %>" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-dark btn-sm">+</button>
-                      </form>
+                        <form
+                          method="post"
+                          action="/decreaseOne/<%= produto.id_prod %>"
+                          enctype="multipart/form-data"
+                        >
+                          <button type="submit" class="btn btn-dark btn-sm">
+                            -
+                          </button>
+                        </form>
+                        <p style="margin: 5px"><%= produto.quantidade %></p>
+                        <form
+                          method="post"
+                          action="/increaseOne/<%= produto.id_prod %>"
+                          enctype="multipart/form-data"
+                        >
+                          <button type="submit" class="btn btn-dark btn-sm">
+                            +
+                          </button>
+                        </form>
                       </div>
-                      
                     </div>
                   </div>
                 </li>
@@ -74,9 +85,22 @@
                 <li class="list-group-item">
                   <div class="d-flex" style="align-items: center">
                     Fornecedor
-                    <div class="fw-bold" style="margin-left: auto; margin-right: 0">
+                    <div
+                      class="fw-bold"
+                      style="margin-left: auto; margin-right: 0"
+                    >
                       <%= produto.supplier.nome_forn %>
                     </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex" style="align-items: center">
+                    <a href="/editaProduto/<%= produto.id_prod %>">
+                      <button class="btn btn-dark m-1">Editar</button>
+                    </a>
+                    <a href="/excluiProduto/<%= produto.id_prod %>">
+                      <button class="btn btn-dark m-1">Excluir</button>
+                    </a>
                   </div>
                 </li>
               </ul>
