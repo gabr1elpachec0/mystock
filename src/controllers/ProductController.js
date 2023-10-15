@@ -27,12 +27,25 @@ module.exports = {
       });
       // console.log(findStockById)
 
+      let valor_estoque = 0
+      let investimento  = 0     
+      // const valor_produto      = findProductsByStockId.map(produto => produto.valor)
+      // const quantidade_produto = findProductsByStockId.map(produto => produto.quantidade)
+
+      for (let i = 0; i < findProductsByStockId.length; i++) {
+        valor_estoque = valor_estoque + (findProductsByStockId[i].valor * findProductsByStockId[i].quantidade)
+        investimento  = investimento + (findProductsByStockId[i].custo * findProductsByStockId[i].quantidade)
+      }
+      // console.log(valor_estoque)
+
 
       if (findStockById) {
         res.render('modelo', {
           produtos: findProductsByStockId,
           nome_estoque: findStockById.nome_es,
-          id_estoque: findStockById.id_es
+          id_estoque: findStockById.id_es,
+          valor_estoque: valor_estoque,
+          investimento: investimento
         });
       } else {
         res.status(404).send('Estoque não encontrado');

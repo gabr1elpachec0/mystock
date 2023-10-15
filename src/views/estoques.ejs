@@ -60,7 +60,7 @@
                                 <%= estoque.id_es %>
                             </th>
                             <th>
-                                <a class="fw-bold" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
+                                <a class="fw-normal" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
                                     <%= estoque.nome_es %>
                                 </a>
                             </th>
@@ -77,9 +77,11 @@
                                 </a>                            
                             </td>
                             <td>
-                                <button class="btn btn-dark" style="">
-                                    Excluir
-                                </button>
+                                <a href="/excluiEstoque/<%= estoque.id_es %>">
+                                    <button class="btn btn-dark" style="">
+                                        Excluir
+                                    </button>
+                                </a>  
                             </td>
                         </tr>                    
                         <br>

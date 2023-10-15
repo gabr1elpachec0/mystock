@@ -155,6 +155,30 @@ module.exports = {
     } else {
       res.status(400).send('ID de estoque inválido');
     }
+  },
+
+  // Delete Stock
+  async deleteStock(req, res) {
+    const stockId = parseInt(req.params.id)
+
+    if(!isNaN(stockId)) {
+      await prisma.produto.deleteMany({
+        where: {
+          id_stock: stockId
+        }
+      })
+
+      await prisma.estoque.delete({
+        where: {
+          id_es: stockId
+        }
+      })
+
+      req.session.estoque_success = "Estoque excluído."
+      res.redirect('/estoques');
+    } else {
+      res.status(400).send('ID de estoque inválido');
+    }
   }
 
 }

@@ -123,5 +123,84 @@ module.exports = {
     }
 
     res.redirect('home')
+  },
+
+  // Get profile data
+  async getProfile(req, res) {
+    if (req.session.logado === true) {
+      const userId = req.session.userId
+
+      const findUserById = await prisma.usuario.findUnique({
+        where: {
+          id_us: userId
+        }
+      })
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      })
+      
+      const lengthStocks = findStocksByUserId.length
+
+      res.render('conta', {
+        id_user: findUserById.id_us,
+        usuario: [findUserById],
+        estoques: lengthStocks
+      })
+    } else {
+      req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
+      res.redirect('login')
+    }
+  },
+
+  // Get Update User Form
+  async getUpdateUserForm(req, res) {
+    if (req.session.logado === true) {
+      const userId = req.session.userId
+
+      const findUserById = await prisma.usuario.findUnique({
+        where: {
+          id_us: userId
+        }
+      })
+
+      res.render('editarPerfil', {
+        usuario: [findUserById]
+      })
+    } else {
+      req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
+      res.redirect('login')
+    }
+    
+  },
+
+  // Update User
+  async updateUser(req, res) {
+    const userId = req.session.userId
+
+    var form_update_user = new formidable.IncomingForm()
+
+    form_update_user.parse(req, async(err, fields, files) => {
+      var nome_usuario = fields['nome']
+      var email_usuario = fields['email']
+      var hash = crypto.createHash('md5').update(Date.now().toString()).digest('hex')
+
+      bcrypt.hash(fields['senha'], saltRounds, async (err, hash) => {
+        await prisma.usuario.update({
+          where: {
+            id_us: userId
+          },
+          data: {
+            email: email_usuario,
+            nome_us: nome_usuario,
+            senha: hash
+          }
+        })
+      })
+      req.session.sucesso = "Usuário atualizado."
+      res.redirect('/login')
+    })
   }
 }

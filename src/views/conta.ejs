@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body style="margin-bottom: 5%;">
+    <%- include('navbar-logado') %>
+    <div class="container mt-5" style="margin-right: auto; margin-left: auto;">
+        <br>
+        <div class="d-flex flex-row mx-3">
+            <h3 class="fw-bold">Meu perfil</h3>
+            <a class="fw-bold" aria-current="page" href="/editarPerfil/<%= id_user %>" style="color: black; margin-left: auto;">
+                <button type="button" class="btn btn-dark" style="background-color: black;">Editar perfil</button>
+            </a>
+        </div>
+        <div class="container mt-5">
+            <table class="table ">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estoques</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% usuario.forEach(function(usuario) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= usuario.id_us %>
+                            </th>
+                            <th class="fw-normal">
+                                <%= usuario.nome_us %>
+                            </th>
+                            </th>
+                            <th class="fw-normal">
+                                <%= usuario.email %>
+                            </th>
+                            <td>
+                                <a href="/estoques">
+                                    <button class="btn btn-dark" style="">
+                                        Ver <%= estoques %> estoque(s)
+                                    </button>
+                                </a>                            
+                            </td>
+                        </tr>                    
+                        <br>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</body>
+</html>

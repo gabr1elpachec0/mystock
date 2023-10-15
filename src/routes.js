@@ -17,6 +17,10 @@ router.get('/cadastro', UserController.getSignUpForm)
 router.get('/logout', UserController.userLogout)
 router.post('/cadastro', UserController.createUser)
 router.post('/login', UserController.loginUser)
+router.get('/conta', UserController.getProfile)
+router.get('/editarPerfil/:id', UserController.getUpdateUserForm)
+router.post('/editarPerfil/:id', UserController.updateUser)
+
 
 // Stock routes
 router.get('/paginaEstoque', StockController.getStockPage)
@@ -25,6 +29,7 @@ router.get('/addEstoque', StockController.getCreateStockForm)
 router.post('/estoque', StockController.createStock)
 router.get('/editaEstoque/:id', StockController.getUpdateStockForm)
 router.post('/editaEstoque/:id', StockController.updateStock)
+router.get('/excluiEstoque/:id', StockController.deleteStock)
 
 // Product routes
 router.get('/produtos/:id', ProductController.getProductsByStockId)
