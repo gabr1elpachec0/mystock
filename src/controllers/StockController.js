@@ -43,11 +43,18 @@ module.exports = {
     }
 
     if (req.session.logado === true) {
-      const estoque = await prisma.estoque.findMany();
+      const userId = req.session.userId
+
+      const findStockByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      })
+      
       // console.log(estoque)
       res.render('estoques',
         {
-          estoques: estoque,
+          estoques: findStockByUserId,
           estoque_success: estoque_success,
           forn_success: forn_success,
           product_success: product_success,
