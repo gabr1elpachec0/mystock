@@ -22,23 +22,9 @@
                     <div class="mb-3" style="text-align: left;">
                         <label class="form-label">Categoria</label>
                         <select class="form-select" aria-label="Default select example" name="categoria" required>
-                            <option selected></option>
-                            <option value="Agro e pet">Agro e pet</option>
-                            <option value="Alimentos e bebidas">Alimentos e bebidas</option>
-                            <option value="Antiguidades e coleções">Antiguidades e coleções</option>
-                            <option value="Arte">Arte</option>
-                            <option value="Automotivo">Automotivo</option>
-                            <option value="Beleza e cuidados pessoais">Beleza e cuidados pessoais</option>
-                            <option value="Brinquedos e hobbies">Brinquedos e hobbies</option>
-                            <option value="Calçados, roupas e bolsas">Calçados, roupas e bolsas</option>
-                            <option value="Casa e decoração">Casa e decoração</option>
-                            <option value="Eletrônicos">Eletrônicos</option>
-                            <option value="Esportes e fitness">Esportes e fitness</option>
-                            <option value="Games">Games</option>
-                            <option value="Livros, filmes e séries">Livros, filmes e séries</option>
-                            <option value="Móveis">Móveis</option>
-                            <option value="Música">Música</option>
-                            <option value="Saúde e beleza">Saúde e beleza</option>
+                            <% categorias.forEach(function (categoria) { %>
+                                <option value="<%= categoria.id %>"><%= categoria.nome %></option>
+                            <% }) %>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background-color: black; border-color: black;">Cadastrar</button>

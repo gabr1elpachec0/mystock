@@ -30,6 +30,7 @@ router.post('/estoque', StockController.createStock)
 router.get('/editaEstoque/:id', StockController.getUpdateStockForm)
 router.post('/editaEstoque/:id', StockController.updateStock)
 router.get('/excluiEstoque/:id', StockController.deleteStock)
+router.get('/filtrar/:id', StockController.filterStocks)
 
 // Product routes
 router.get('/produtos/:id', ProductController.getProductsByStockId)
