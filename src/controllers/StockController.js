@@ -50,6 +50,8 @@ module.exports = {
           id_user: userId
         }
       })
+
+      console.log(findStockByUserId)
       
       // console.log(estoque)
       res.render('estoques',
@@ -186,6 +188,12 @@ module.exports = {
     } else {
       res.status(400).send('ID de estoque inválido');
     }
-  }
+  },
+
+  // Filter Stocks
+
+  // async filterStocks(req, res) {
+  //   const userId = req.session.userId
+  // }
 
 }

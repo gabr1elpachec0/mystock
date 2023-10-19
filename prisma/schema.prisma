@@ -24,12 +24,12 @@ model Usuario {
 model Estoque {
   id_es     Int    @id @default(autoincrement())
   id_user   Int
+  id_categoria Int
   nome_es   String
-  categoria String
 
   user Usuario @relation(fields: [id_user], references: [id_us])
+  category Categoria @relation(fields: [id_categoria], references: [id])
 
-  Fin_estoque Fin_estoque[]
   Produto     Produto[]
 }
 
@@ -47,7 +47,6 @@ model Produto {
   supplier         Fornecedor @relation(fields: [id_supply], references: [id_forn])
 
   Movimentacao Movimentacao[]
-  Fin_produto  Fin_produto[]
 }
 
 model Movimentacao {
@@ -68,24 +67,9 @@ model Fornecedor {
   Produto Produto[]
 }
 
-model Fin_estoque {
-  id_fin_es Int   @id @default(autoincrement())
-  id_stock  Int
-  Valor     Float
-  Invest    Float
-  Bruto     Float
-  Liquido   Float
+model Categoria {
+  id Int @id @default(autoincrement())
+  nome String @unique
 
-  stock Estoque @relation(fields: [id_stock], references: [id_es])
-}
-
-model Fin_produto {
-  id_fin_prod Int   @id @default(autoincrement())
-  id_product  Int
-  Valor       Float
-  Invest      Float
-  Bruto       Float
-  Liquido     Float
-
-  fin_product Produto @relation(fields: [id_product], references: [id_prod])
+  Estoque_Categoria Estoque[]
 }

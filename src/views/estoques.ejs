@@ -41,9 +41,17 @@
             <a class="fw-bold" aria-current="page" href="/addEstoque" style="color: black; margin-left: auto;">
                 <button type="button" class="btn btn-dark" style="background-color: black;">Cadastrar Estoque</button>
             </a>
+            <div class="dropdown mx-3">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black;">
+            Filtrar por categoria
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/filtrar">Categoria</a></li>
+          </ul>
         </div>
-        <div class="container mt-5">
-            <table class="table ">
+        </div>
+        <div class="container" style="margin-top: 50px;">
+            <table class="table">
                 <thead>
                     <tr>
                     <th scope="col">ID</th>
@@ -62,11 +70,6 @@
                             <th>
                                 <a class="fw-normal" aria-current="page" href="/produtos/<%= estoque.id_es %>" style="color: black; margin-left: auto; text-decoration: none;">
                                     <%= estoque.nome_es %>
-                                </a>
-                            </th>
-                            <th>
-                                <a class="fw-normal" aria-current="page" style="color: black; margin-left: auto; text-decoration: none;">
-                                    <%= estoque.categoria %>
                                 </a>
                             </th>
                             <td>
