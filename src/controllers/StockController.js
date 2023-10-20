@@ -48,7 +48,7 @@ module.exports = {
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
-        const movements = await prisma.movimentacao.findMany({
+        const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
           }
@@ -107,7 +107,7 @@ module.exports = {
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
-        const movements = await prisma.movimentacao.findMany({
+        const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
           }
@@ -185,7 +185,7 @@ module.exports = {
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
-        const movements = await prisma.movimentacao.findMany({
+        const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
           }
@@ -243,7 +243,7 @@ module.exports = {
           }
         })
 
-        const createMovement = await prisma.movimentacao.create({
+        const createMovement = await prisma.movimentacao_Estoque.create({
           data: {
             id_estoque: stockId,
             operacao: `${findStockById.nome_es} foi alterado.`,
@@ -271,7 +271,7 @@ module.exports = {
         }
       })
 
-      await prisma.movimentacao.deleteMany({
+      await prisma.movimentacao_Estoque.deleteMany({
         where: {
           id_estoque: stockId
         }
@@ -348,7 +348,7 @@ module.exports = {
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
-        const movements = await prisma.movimentacao.findMany({
+        const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
           }

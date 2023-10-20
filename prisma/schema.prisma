@@ -31,7 +31,7 @@ model Estoque {
   category Categoria @relation(fields: [id_categoria], references: [id])
 
   Produto      Produto[]
-  Movimentacao Movimentacao[]
+  Movimentacao Movimentacao_Estoque[]
 }
 
 model Produto {
@@ -46,15 +46,26 @@ model Produto {
 
   id_stock_product Estoque    @relation(fields: [id_stock], references: [id_es])
   supplier         Fornecedor @relation(fields: [id_supply], references: [id_forn])
+
+  Movimentacao Movimentacao_Produto[]
 }
 
-model Movimentacao {
+model Movimentacao_Estoque {
   id_mov     Int      @id @default(autoincrement())
   id_estoque Int
   operacao   String
   data       DateTime @default(now())
 
   estoque Estoque @relation(fields: [id_estoque], references: [id_es])
+}
+
+model Movimentacao_Produto {
+  id_mov     Int      @id @default(autoincrement())
+  id_produto Int
+  operacao   String
+  data       DateTime @default(now())
+
+  produto Produto @relation(fields: [id_produto], references: [id_prod])
 }
 
 model Fornecedor {

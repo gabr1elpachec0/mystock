@@ -23,7 +23,7 @@ module.exports = {
     let counter = 0
 
     for (let i = 0; i < findStocksByUserId.length; i++) {
-      const movements = await prisma.movimentacao.findMany({
+      const movements = await prisma.movimentacao_Estoque.findMany({
         where: {
           id_estoque: findStocksByUserId[i].id_es
         }
@@ -64,7 +64,7 @@ module.exports = {
     });
 
     for (let i = 0; i < findStocksByUserId.length; i++) {
-      await prisma.movimentacao.deleteMany({
+      await prisma.movimentacao_Estoque.deleteMany({
         where: {
           id_estoque: findStocksByUserId[i].id_es
         }
