@@ -4,16 +4,6 @@ const formidable = require('formidable')
 const prisma = new PrismaClient()
 
 module.exports = {
-  // Get Stock Page
-  async getStockPage(req, res) {
-    if (req.session.logado === true) {
-      res.render('paginaestoque')
-    } else {
-      req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
-      res.redirect('login')
-    }
-  },
-
 
   // Get Stocks
   async getStocks(req, res) {
@@ -45,7 +35,7 @@ module.exports = {
     if (req.session.logado === true) {
       const userId = req.session.userId
 
-      const findStockByUserId = await prisma.estoque.findMany({
+      const findStocksByUserId = await prisma.estoque.findMany({
         where: {
           id_user: userId
         },
@@ -54,6 +44,23 @@ module.exports = {
         }
       })
 
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       const findCategories = await prisma.categoria.findMany()
 
       // console.log(findStockByUserId)
@@ -61,12 +68,13 @@ module.exports = {
       // console.log(estoque)
       res.render('estoques',
         {
-          estoques: findStockByUserId,
+          estoques: findStocksByUserId,
           categorias: findCategories,
           estoque_success: estoque_success,
           forn_success: forn_success,
           product_success: product_success,
-          product_update: product_update
+          product_update: product_update,
+          counter: counter
         });
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -86,8 +94,35 @@ module.exports = {
       //   console.log(findCategories)
       // }
 
+      const userId = req.session.userId;
+
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       res.render('addEstoque', {
-        categorias: findCategories
+        categorias: findCategories,
+        counter: counter
       })
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -137,12 +172,39 @@ module.exports = {
 
       const findCategories = await prisma.categoria.findMany()
 
+      const userId = req.session.userId;
+
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       if (findStockById) {
         res.render('editaEstoque', {
           id_estoque: findStockById.id_es,
           nome_estoque: findStockById.nome_es,
           categoria_estoque: findStockById.category.id,
-          categorias: findCategories
+          categorias: findCategories,
+          counter: counter
         })
       } else {
         res.status(404).send('Estoque não encontrado');
@@ -175,6 +237,19 @@ module.exports = {
           }
         })
 
+        const findStockById = await prisma.estoque.findUnique({
+          where: {
+            id_es: stockId
+          }
+        })
+
+        const createMovement = await prisma.movimentacao.create({
+          data: {
+            id_estoque: stockId,
+            operacao: `${findStockById.nome_es} foi alterado.`,
+          }
+        })
+
         // console.log('Método iniciou')
 
         req.session.estoque_success = "Estoque atualizado."
@@ -196,11 +271,19 @@ module.exports = {
         }
       })
 
+      await prisma.movimentacao.deleteMany({
+        where: {
+          id_estoque: stockId
+        }
+      })
+
       await prisma.estoque.delete({
         where: {
           id_es: stockId
         }
       })
+
+
 
       req.session.estoque_success = "Estoque excluído."
       res.redirect('/estoques');
@@ -251,9 +334,32 @@ module.exports = {
         }
       })
 
-      console.log(findStocksByCategoryId)
+      // console.log(findStocksByCategoryId)
 
       const findCategories = await prisma.categoria.findMany()
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
 
       res.render('estoquesFiltrados', {
         estoques: findStocksByCategoryId,
@@ -261,7 +367,8 @@ module.exports = {
         estoque_success: estoque_success,
         forn_success: forn_success,
         product_success: product_success,
-        product_update: product_update
+        product_update: product_update,
+        counter: counter
       })
     } else {
       res.status(400).send('ID de categoria inválido');

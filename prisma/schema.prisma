@@ -22,15 +22,16 @@ model Usuario {
 }
 
 model Estoque {
-  id_es     Int    @id @default(autoincrement())
-  id_user   Int
+  id_es        Int    @id @default(autoincrement())
+  id_user      Int
   id_categoria Int
-  nome_es   String
+  nome_es      String
 
-  user Usuario @relation(fields: [id_user], references: [id_us])
+  user     Usuario   @relation(fields: [id_user], references: [id_us])
   category Categoria @relation(fields: [id_categoria], references: [id])
 
-  Produto     Produto[]
+  Produto      Produto[]
+  Movimentacao Movimentacao[]
 }
 
 model Produto {
@@ -45,17 +46,15 @@ model Produto {
 
   id_stock_product Estoque    @relation(fields: [id_stock], references: [id_es])
   supplier         Fornecedor @relation(fields: [id_supply], references: [id_forn])
-
-  Movimentacao Movimentacao[]
 }
 
 model Movimentacao {
   id_mov     Int      @id @default(autoincrement())
-  id_product Int
+  id_estoque Int
   operacao   String
-  data       DateTime
+  data       DateTime @default(now())
 
-  product Produto @relation(fields: [id_product], references: [id_prod])
+  estoque Estoque @relation(fields: [id_estoque], references: [id_es])
 }
 
 model Fornecedor {
@@ -68,7 +67,7 @@ model Fornecedor {
 }
 
 model Categoria {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   nome String @unique
 
   Estoque_Categoria Estoque[]

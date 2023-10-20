@@ -13,8 +13,37 @@ module.exports = {
       req.session.forn_error = ""
     }
     if (req.session.logado === true) {
+      const userId = req.session.userId
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        },
+        include: {
+          category: true
+        }
+      })
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       res.render('addForn', {
-        forn_error: forn_error
+        forn_error: forn_error,
+        counter: counter
       })
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"

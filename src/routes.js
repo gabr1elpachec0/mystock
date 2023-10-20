@@ -5,6 +5,7 @@ const UserController = require('./controllers/UserController')
 const StockController = require('./controllers/StockController')
 const ProductController = require('./controllers/ProductController')
 const SupplierController = require('./controllers/SupplierController')
+const MovementController = require('./controllers/MovementController')
 
 const router = Router()
 
@@ -23,7 +24,6 @@ router.post('/editarPerfil/:id', UserController.updateUser)
 
 
 // Stock routes
-router.get('/paginaEstoque', StockController.getStockPage)
 router.get('/estoques', StockController.getStocks)
 router.get('/addEstoque', StockController.getCreateStockForm)
 router.post('/estoque', StockController.createStock)
@@ -45,5 +45,9 @@ router.get('/excluiProduto/:id', ProductController.deleteProduct)
 // Supplier routes
 router.get('/addForn', SupplierController.getCreateSupplierForm)
 router.post('/addForn', SupplierController.createSupplier)
+
+// Movement routes
+router.get('/movimentacao', MovementController.getMovement)
+router.get('/limparMovimentacao', MovementController.cleanMovement)
 
 module.exports = router

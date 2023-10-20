@@ -5,6 +5,21 @@
         <div class="navbar-nav ms-auto">
             <a class="nav-link fw-bold m-2" aria-current="page" href="/conta" style="color: black;">Conta</a>
             <a class="nav-link fw-bold m-2" aria-current="page" href="/logout" style="color: black;">Logout</a>
+            <a id="link" class="nav-link" href="/movimentacao" style="margin-right: 20px;">
+                <button
+                type="button"
+                class="btn position-relative"
+                id="notificationButton"
+                >
+                <img src="../../imagens/bell.svg" alt="bell" />
+                <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                    style="background-color: black;"
+                >
+                <%= counter %>
+                </span>
+                </button>
+            </a>
         </div>
         </div>
     </div>

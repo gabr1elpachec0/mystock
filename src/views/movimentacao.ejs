@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('head') %>
+    <title>MyStock</title>
+</head>
+<body style="margin-bottom: 5%;">
+    <%- include('navbar-logado') %>
+    <div class="container mt-5" style="margin-right: auto; margin-left: auto;">
+        <% if(cleanMovement) { %>
+            <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                <p>
+                    <%= cleanMovement %>
+                </p>
+            </div>
+        <% } %>
+        <br>
+        <div class="d-flex flex-row mx-3">
+          <h3 class="fw-bold">Movimentação de estoques</h3>
+          <a class="fw-bold" aria-current="page" href="/limparMovimentacao" style="color: black; margin-left: auto;">
+                <button type="button" class="btn btn-dark" style="background-color: black;">Limpar Registros</button>
+          </a>
+        </div>
+        <div class="container" style="margin-top: 50px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Operação</th>
+                    <th scope="col">Data</th>                    
+                    </tr>
+                </thead>
+                <tbody>
+                    <% movement.forEach(function(movement) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= movement.id_mov %>
+                            </th>
+                            <th class="fw-normal" scope="row">
+                                <%= movement.operacao %>
+                            </th>
+                            <th scope="row">
+                                <%= movement.data %>
+                            </th>
+                        </tr>                    
+                        <br>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</body>
+</html>

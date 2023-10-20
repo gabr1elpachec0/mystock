@@ -144,10 +144,28 @@ module.exports = {
       
       const lengthStocks = findStocksByUserId.length
 
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       res.render('conta', {
         id_user: findUserById.id_us,
         usuario: [findUserById],
-        estoques: lengthStocks
+        estoques: lengthStocks,
+        counter: counter
       })
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -166,8 +184,32 @@ module.exports = {
         }
       })
 
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       res.render('editarPerfil', {
-        usuario: [findUserById]
+        usuario: [findUserById],
+        counter: counter
       })
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"

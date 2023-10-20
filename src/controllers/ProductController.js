@@ -37,6 +37,31 @@ module.exports = {
         investimento  = investimento + (findProductsByStockId[i].custo * findProductsByStockId[i].quantidade)
       }
       // console.log(valor_estoque)
+      const userId = req.session.userId;
+
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
 
 
       if (findStockById) {
@@ -45,7 +70,8 @@ module.exports = {
           nome_estoque: findStockById.nome_es,
           id_estoque: findStockById.id_es,
           valor_estoque: valor_estoque,
-          investimento: investimento
+          investimento: investimento,
+          counter: counter
         });
       } else {
         res.status(404).send('Estoque não encontrado');
@@ -71,11 +97,39 @@ module.exports = {
       // console.log(findSuppliers)
 
       if (!isNaN(stockId)) {
+
+        const userId = req.session.userId;
+
+
+        const findStocksByUserId = await prisma.estoque.findMany({
+          where: {
+            id_user: userId
+          }
+        });
+
+        let findMovement = []
+        let counter = 0
+
+        for (let i = 0; i < findStocksByUserId.length; i++) {
+          const movements = await prisma.movimentacao.findMany({
+            where: {
+              id_estoque: findStocksByUserId[i].id_es
+            }
+          });
+
+          findMovement = findMovement.concat(movements);
+        }
+
+        const numberOfMovements = findMovement.length;
+
+        counter += numberOfMovements;
+
         // console.log(stockId)
         res.render('addProduto', {
           forn_success: forn_success,
           suppliers: findSuppliers,
-          id_estoque: stockId
+          id_estoque: stockId,
+          counter: counter
         })
       }
       
@@ -212,9 +266,36 @@ module.exports = {
 
       const findSuppliers = await prisma.fornecedor.findMany()
 
+      const userId = req.session.userId;
+
+
+      const findStocksByUserId = await prisma.estoque.findMany({
+        where: {
+          id_user: userId
+        }
+      });
+
+      let findMovement = []
+      let counter = 0
+
+      for (let i = 0; i < findStocksByUserId.length; i++) {
+        const movements = await prisma.movimentacao.findMany({
+          where: {
+            id_estoque: findStocksByUserId[i].id_es
+          }
+        });
+
+        findMovement = findMovement.concat(movements);
+      }
+
+      const numberOfMovements = findMovement.length;
+
+      counter += numberOfMovements;
+
       res.render('editaProduto', {
         produto: findProductById,
-        suppliers: findSuppliers
+        suppliers: findSuppliers,
+        counter: counter
       })
     } else {
       res.status(400).send('ID de produto inválido');
