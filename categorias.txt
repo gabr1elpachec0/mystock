@@ -1,15 +1,16 @@
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Agro e pet')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Alimentos e bebidas')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Antiguidades e coleções')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Arte')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Automotivo')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Beleza e cuidados pessoais')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Brinquedos e hobbies')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Calçados, roupas e bolsas')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Casa e decoração')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]', 'Eletrônicos')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Games')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Livros, filmes e séries')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Móveis')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Música')
-INSERT INTO `categoria`(`id`, `nome`) VALUES ('[value-1]','Saúde e beleza')
+INSERT INTO `categoria`(`id`, `nome`) VALUES 
+  ('[value-1]','Agro e pet'),
+  ('[value-1]','Alimentos e bebidas'),
+  ('[value-1]','Antiguidades e coleções'),
+  ('[value-1]','Arte'),
+  ('[value-1]','Automotivo'),
+  ('[value-1]','Beleza e cuidados pessoais'),
+  ('[value-1]','Brinquedos e hobbies'),
+  ('[value-1]','Calçados, roupas e bolsas'),
+  ('[value-1]','Casa e decoração'),
+  ('[value-1]', 'Eletrônicos'),
+  ('[value-1]','Games'),
+  ('[value-1]','Livros, filmes e séries'),
+  ('[value-1]','Móveis'),
+  ('[value-1]','Música'),
+  ('[value-1]','Saúde e beleza')

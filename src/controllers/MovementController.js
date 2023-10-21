@@ -20,9 +20,25 @@ module.exports = {
     });
 
     let findMovement = []
+    let findProductsMovement = []
     let counter = 0
 
     for (let i = 0; i < findStocksByUserId.length; i++) {
+      const findProductsByStockId = await prisma.produto.findMany({
+        where: {
+          id_stock: findStocksByUserId[i].id_es
+        }
+      })
+
+      for (let j = 0; j < findProductsByStockId.length; j++) {
+        const productMovements = await prisma.movimentacao_Produto.findMany({
+          where: {
+            id_produto: findProductsByStockId[j].id_prod
+          }
+        })
+        findProductsMovement = findProductsMovement.concat(productMovements)
+      } 
+
       const movements = await prisma.movimentacao_Estoque.findMany({
         where: {
           id_estoque: findStocksByUserId[i].id_es
@@ -32,11 +48,16 @@ module.exports = {
       findMovement = findMovement.concat(movements);
     }
 
-    const numberOfMovements = findMovement.length;
+    const numberOfMovements = findMovement.length + findProductsMovement.length;
 
     counter += numberOfMovements;
     
     const formatedMovements = findMovement.map((movement) => ({
+      ...movement,
+      data: dayjs(movement.data).format('DD/MM/YYYY HH:mm')
+    }))
+
+    const formatedProductMovements = findProductsMovement.map((movement) => ({
       ...movement,
       data: dayjs(movement.data).format('DD/MM/YYYY HH:mm')
     }))
@@ -46,6 +67,7 @@ module.exports = {
 
     res.render('movimentacao', {
       movement: formatedMovements,
+      productsMovement: formatedProductMovements,
       counter: counter,
       cleanMovement: cleanMovement
     });
@@ -64,6 +86,21 @@ module.exports = {
     });
 
     for (let i = 0; i < findStocksByUserId.length; i++) {
+
+      const findProductsByStockId = await prisma.produto.findMany({
+        where: {
+          id_stock: findStocksByUserId[i].id_es
+        }
+      })
+
+      for(let j = 0; j < findProductsByStockId.length; j++) {
+        await prisma.movimentacao_Produto.deleteMany({
+          where: {
+            id_produto: findProductsByStockId[j].id_prod
+          }
+        })
+      }
+
       await prisma.movimentacao_Estoque.deleteMany({
         where: {
           id_estoque: findStocksByUserId[i].id_es

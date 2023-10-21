@@ -16,7 +16,7 @@
         <% } %>
         <br>
         <div class="d-flex flex-row mx-3">
-          <h3 class="fw-bold">Movimentação de estoques</h3>
+          <h3 class="fw-bold">Movimentação de Estoques e Produtos</h3>
           <a class="fw-bold" aria-current="page" href="/limparMovimentacao" style="color: black; margin-left: auto;">
                 <button type="button" class="btn btn-dark" style="background-color: black;">Limpar Registros</button>
           </a>
@@ -41,6 +41,20 @@
                             </th>
                             <th scope="row">
                                 <%= movement.data %>
+                            </th>
+                        </tr>                    
+                        <br>
+                    <% }); %>
+                    <% productsMovement.forEach(function(productMovement) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= productMovement.id_mov %>
+                            </th>
+                            <th class="fw-normal" scope="row">
+                                <%= productMovement.operacao %>
+                            </th>
+                            <th scope="row">
+                                <%= productMovement.data %>
                             </th>
                         </tr>                    
                         <br>

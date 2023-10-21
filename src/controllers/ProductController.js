@@ -47,9 +47,25 @@ module.exports = {
       });
 
       let findMovement = []
+      let findProductsMovement = []
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
+        const findProductsByStockId = await prisma.produto.findMany({
+          where: {
+            id_stock: findStocksByUserId[i].id_es
+          }
+        })
+
+        for (let j = 0; j < findProductsByStockId.length; j++) {
+          const productMovements = await prisma.movimentacao_Produto.findMany({
+            where: {
+              id_produto: findProductsByStockId[j].id_prod
+            }
+          })
+          findProductsMovement = findProductsMovement.concat(productMovements)
+        }
+
         const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
@@ -59,7 +75,7 @@ module.exports = {
         findMovement = findMovement.concat(movements);
       }
 
-      const numberOfMovements = findMovement.length;
+      const numberOfMovements = findMovement.length + findProductsMovement.length;
 
       counter += numberOfMovements;
 
@@ -108,9 +124,25 @@ module.exports = {
         });
 
         let findMovement = []
+        let findProductsMovement = []
         let counter = 0
 
         for (let i = 0; i < findStocksByUserId.length; i++) {
+          const findProductsByStockId = await prisma.produto.findMany({
+            where: {
+              id_stock: findStocksByUserId[i].id_es
+            }
+          })
+
+          for (let j = 0; j < findProductsByStockId.length; j++) {
+            const productMovements = await prisma.movimentacao_Produto.findMany({
+              where: {
+                id_produto: findProductsByStockId[j].id_prod
+              }
+            })
+            findProductsMovement = findProductsMovement.concat(productMovements)
+          }
+
           const movements = await prisma.movimentacao_Estoque.findMany({
             where: {
               id_estoque: findStocksByUserId[i].id_es
@@ -120,7 +152,7 @@ module.exports = {
           findMovement = findMovement.concat(movements);
         }
 
-        const numberOfMovements = findMovement.length;
+        const numberOfMovements = findMovement.length + findProductsMovement.length;
 
         counter += numberOfMovements;
 
@@ -207,6 +239,13 @@ module.exports = {
               quantidade: (findProductById.quantidade + 1)
             }
           })
+
+          const createMovement = await prisma.movimentacao_Produto.create({
+            data: {
+              id_produto: productId,
+              operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
+            }
+          })
         })        
 
         req.session.product_update = "Produto atualizado."
@@ -240,6 +279,13 @@ module.exports = {
             },
             data: {
               quantidade: (findProductById.quantidade - 1)
+            }
+          })
+
+          const createMovement = await prisma.movimentacao_Produto.create({
+            data: {
+              id_produto: productId,
+              operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
             }
           })
         })
@@ -276,9 +322,25 @@ module.exports = {
       });
 
       let findMovement = []
+      let findProductsMovement = []
       let counter = 0
 
       for (let i = 0; i < findStocksByUserId.length; i++) {
+        const findProductsByStockId = await prisma.produto.findMany({
+          where: {
+            id_stock: findStocksByUserId[i].id_es
+          }
+        })
+
+        for (let j = 0; j < findProductsByStockId.length; j++) {
+          const productMovements = await prisma.movimentacao_Produto.findMany({
+            where: {
+              id_produto: findProductsByStockId[j].id_prod
+            }
+          })
+          findProductsMovement = findProductsMovement.concat(productMovements)
+        }
+
         const movements = await prisma.movimentacao_Estoque.findMany({
           where: {
             id_estoque: findStocksByUserId[i].id_es
@@ -288,7 +350,7 @@ module.exports = {
         findMovement = findMovement.concat(movements);
       }
 
-      const numberOfMovements = findMovement.length;
+      const numberOfMovements = findMovement.length + findProductsMovement.length;
 
       counter += numberOfMovements;
 
@@ -343,10 +405,16 @@ module.exports = {
           }
         })
 
-        const createMovement = await prisma.movimentacao.create({
+        const findProductById = await prisma.produto.findUnique({
+          where: {
+            id_prod: productId
+          }
+        })
+
+        const createMovement = await prisma.movimentacao_Produto.create({
           data: {
-            id_estoque: stockId,
-            operacao: `${findStockById.nome_es} foi alterado.`,
+            id_produto: productId,
+            operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
           }
         })
       })

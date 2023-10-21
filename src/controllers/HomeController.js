@@ -28,9 +28,25 @@ module.exports = {
     });
 
     let findMovement = []
+    let findProductsMovement = []
     let counter = 0
 
     for (let i = 0; i < findStocksByUserId.length; i++) {
+      const findProductsByStockId = await prisma.produto.findMany({
+        where: {
+          id_stock: findStocksByUserId[i].id_es
+        }
+      })
+
+      for (let j = 0; j < findProductsByStockId.length; j++) {
+        const productMovements = await prisma.movimentacao_Produto.findMany({
+          where: {
+            id_produto: findProductsByStockId[j].id_prod
+          }
+        })
+        findProductsMovement = findProductsMovement.concat(productMovements)
+      }
+
       const movements = await prisma.movimentacao_Estoque.findMany({
         where: {
           id_estoque: findStocksByUserId[i].id_es
@@ -40,7 +56,7 @@ module.exports = {
       findMovement = findMovement.concat(movements);
     }
 
-    const numberOfMovements = findMovement.length;
+    const numberOfMovements = findMovement.length + findProductsMovement.length;
 
     counter += numberOfMovements;
 
