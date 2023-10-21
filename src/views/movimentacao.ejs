@@ -31,34 +31,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% movement.forEach(function(movement) { %>
-                        <tr>
+                    <% allMovements.forEach(function (allMovement) { %>
+                            <tr>
                             <th scope="row">
-                                <%= movement.id_mov %>
+                                <%= allMovement.id_mov %>
                             </th>
                             <th class="fw-normal" scope="row">
-                                <%= movement.operacao %>
+                                <%= allMovement.operacao %>
                             </th>
                             <th scope="row">
-                                <%= movement.data %>
+                                <%= allMovement.data %>
                             </th>
-                        </tr>                    
-                        <br>
-                    <% }); %>
-                    <% productsMovement.forEach(function(productMovement) { %>
-                        <tr>
-                            <th scope="row">
-                                <%= productMovement.id_mov %>
-                            </th>
-                            <th class="fw-normal" scope="row">
-                                <%= productMovement.operacao %>
-                            </th>
-                            <th scope="row">
-                                <%= productMovement.data %>
-                            </th>
-                        </tr>                    
-                        <br>
-                    <% }); %>
+                        </tr>   
+                    <% }) %>                                         
                 </tbody>
             </table>
         </div>    

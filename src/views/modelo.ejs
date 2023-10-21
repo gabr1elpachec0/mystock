@@ -70,7 +70,7 @@
                   <div class="d-flex" style="align-items: center">
                     Valor Unitário
                     <div style="margin-left: auto; margin-right: 0">
-                      R$ <%= produto.valor %>,00
+                      R$ <%= produto.valor.toFixed(2) %>,00
                     </div>
                   </div>
                 </li>
@@ -78,7 +78,7 @@
                   <div class="d-flex" style="align-items: center">
                     Valor Total
                     <div style="margin-left: auto; margin-right: 0">
-                      R$ <%= (produto.valor * produto.quantidade) %>,00
+                      R$ <%= (produto.valor * produto.quantidade).toFixed(2) %>,00
                     </div>
                   </div>
                 </li>
@@ -128,7 +128,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: black"
-            >R$ <%= valor_estoque %>,00</a
+            >R$ <%= valor_estoque.toFixed(2) %>,00</a
           >
         </div>
         <div class="navbar-nav">
@@ -142,7 +142,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: darkred"
-            >R$ <%= investimento %>,00</a
+            >R$ <%= investimento.toFixed(2) %>,00</a
           >
         </div>
         <div class="navbar-nav">
@@ -156,7 +156,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: darkgreen"
-            >R$ <%= (valor_estoque - investimento) %>,00</a
+            >R$ <%= (valor_estoque - investimento).toFixed(2) %>,00</a
           >
         </div>
       </div>

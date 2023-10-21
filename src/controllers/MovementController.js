@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const dayjs = require('dayjs')
+const moment = require('moment')
 
 module.exports = {
 
@@ -54,20 +55,28 @@ module.exports = {
     
     const formatedMovements = findMovement.map((movement) => ({
       ...movement,
-      data: dayjs(movement.data).format('DD/MM/YYYY HH:mm')
+      data: dayjs(movement.data).format('DD/MM/YYYY HH:mm:ss')
     }))
 
     const formatedProductMovements = findProductsMovement.map((movement) => ({
       ...movement,
-      data: dayjs(movement.data).format('DD/MM/YYYY HH:mm')
+      data: dayjs(movement.data).format('DD/MM/YYYY HH:mm:ss')
     }))
+
+    function parseDate(dateString) {
+      return moment(dateString, "DD-MM-YYYY HH:mm:ss");
+    }
+
+    let allMovements = formatedMovements.concat(formatedProductMovements)
+
+    // Ordene o array combinado com base na data em ordem decrescente usando Moment.js
+    allMovements.sort((a, b) => parseDate(b.data).isBefore(parseDate(a.data)) ? -1 : 1);
 
     // console.log(findMovement);
     // console.log(counter)
 
     res.render('movimentacao', {
-      movement: formatedMovements,
-      productsMovement: formatedProductMovements,
+      allMovements: allMovements,
       counter: counter,
       cleanMovement: cleanMovement
     });

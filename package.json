@@ -21,6 +21,7 @@
     "express-session": "^1.17.3",
     "formidable": "^2.1.1",
     "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
     "prisma": "^4.15.0",
