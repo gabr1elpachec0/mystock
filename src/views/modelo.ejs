@@ -7,6 +7,13 @@
   <body style="margin-bottom: 5%">
     <%- include('navbar-logado') %>
     <div class="container mt-5" style="margin-right: auto; margin-left: auto">
+      <% if(product_update) { %>
+            <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                <p>
+                    <%= product_update %>
+                </p>
+            </div>
+        <% } %>
       <div class="d-flex flex-row mx-3">
         <h3 class="fw-bold"><%= nome_estoque %></h3>
         <a

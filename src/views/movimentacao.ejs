@@ -16,7 +16,7 @@
         <% } %>
         <br>
         <div class="d-flex flex-row mx-3">
-          <h3 class="fw-bold">Movimentação de Estoques e Produtos</h3>
+          <h3 class="fw-bold">Histórico de Movimentação de Estoques e Produtos</h3>
           <a class="fw-bold" aria-current="page" href="/limparMovimentacao" style="color: black; margin-left: auto;">
                 <button type="button" class="btn btn-dark" style="background-color: black;">Limpar Registros</button>
           </a>
@@ -25,17 +25,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Operação</th>
                     <th scope="col">Data</th>                    
                     </tr>
                 </thead>
                 <tbody>
                     <% allMovements.forEach(function (allMovement) { %>
-                            <tr>
-                            <th scope="row">
-                                <%= allMovement.id_mov %>
-                            </th>
+                        <tr>
                             <th class="fw-normal" scope="row">
                                 <%= allMovement.operacao %>
                             </th>

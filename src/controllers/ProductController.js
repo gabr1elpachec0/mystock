@@ -9,6 +9,13 @@ const prisma = new PrismaClient()
 module.exports = {
   async getProductsByStockId(req, res) {
     var stockId = parseInt(req.params.id);
+    var product_update
+
+    
+    if (req.session.product_update) {
+      product_update = req.session.product_update
+      req.session.product_update = ""
+    }
 
     if (!isNaN(stockId)) {
       const findProductsByStockId = await prisma.produto.findMany({
@@ -87,7 +94,8 @@ module.exports = {
           id_estoque: findStockById.id_es,
           valor_estoque: valor_estoque,
           investimento: investimento,
-          counter: counter
+          counter: counter,
+          product_update: product_update
         });
       } else {
         res.status(404).send('Estoque não encontrado');
@@ -243,13 +251,13 @@ module.exports = {
           const createMovement = await prisma.movimentacao_Produto.create({
             data: {
               id_produto: productId,
-              operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
+              operacao: `A quantidade de ${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi aumentada.`,
             }
           })
         })        
 
         req.session.product_update = "Produto atualizado."
-        res.redirect(`/estoques`)
+        res.redirect(`/produtos/${productId}`)
       }
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -285,13 +293,13 @@ module.exports = {
           const createMovement = await prisma.movimentacao_Produto.create({
             data: {
               id_produto: productId,
-              operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
+              operacao: `A quantidade de ${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi reduzida.`,
             }
           })
         })
 
         req.session.product_update = "Produto atualizado."
-        res.redirect(`/estoques`)
+        res.redirect(`/produtos/${productId}`)
       }
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -420,7 +428,7 @@ module.exports = {
       })
 
       req.session.product_update = "Produto atualizado."
-      res.redirect(`/estoques`)
+      res.redirect(`/produtos/${productId}`)
     } else {
       res.status(400).send('ID de produto inválido');
     }
