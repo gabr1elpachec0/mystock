@@ -10,7 +10,12 @@ module.exports = {
   async getProductsByStockId(req, res) {
     var stockId = parseInt(req.params.id);
     var product_update
+    var product_success
 
+    if (req.session.product_success) {
+      product_success = req.session.product_success
+      req.session.product_success = ""
+    }
     
     if (req.session.product_update) {
       product_update = req.session.product_update
@@ -95,7 +100,8 @@ module.exports = {
           valor_estoque: valor_estoque,
           investimento: investimento,
           counter: counter,
-          product_update: product_update
+          product_update: product_update,
+          product_success: product_success
         });
       } else {
         res.status(404).send('Estoque não encontrado');
@@ -217,9 +223,10 @@ module.exports = {
           imagem: nomeimg,
         },
       })
+
       // console.log(createProduct)
       req.session.product_success = "Produto cadastrado."
-      res.redirect('/estoques')
+      res.redirect(`/produtos/${parseInt(stockId)}`)
     })
   },
 
@@ -257,7 +264,7 @@ module.exports = {
         })        
 
         req.session.product_update = "Produto atualizado."
-        res.redirect(`/produtos/${productId}`)
+        res.redirect(`/produtos/${findProductById.id_stock}`)
       }
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -299,7 +306,7 @@ module.exports = {
         })
 
         req.session.product_update = "Produto atualizado."
-        res.redirect(`/produtos/${productId}`)
+        res.redirect(`/produtos/${findProductById.id_stock}`)
       }
     } else {
       req.session.login_warning = "Realize o login para ter acesso a esse serviço!"
@@ -425,10 +432,12 @@ module.exports = {
             operacao: `${findProductById.nome_prod} pertencente ao estoque ${findProductById.id_stock} foi alterado.`,
           }
         })
+
+        req.session.product_update = "Produto atualizado."
+        res.redirect(`/produtos/${findProductById.id_stock}`)
       })
 
-      req.session.product_update = "Produto atualizado."
-      res.redirect(`/produtos/${productId}`)
+      
     } else {
       res.status(400).send('ID de produto inválido');
     }
@@ -439,13 +448,27 @@ module.exports = {
     const productId = parseInt(req.params.id)
 
     if(!isNaN(productId)) {
+
+      const findProductById = await prisma.produto.findUnique({
+        where: {
+          id_prod: productId
+        }
+      })
+
+      await prisma.movimentacao_Produto.deleteMany({
+        where: {
+          id_produto: productId
+        }
+      })
+
       await prisma.produto.delete({
         where: {
           id_prod: productId
         }
       })
+
       req.session.product_update = "Produto excluído."
-      res.redirect(`/estoques`)
+      res.redirect(`/produtos/${findProductById.id_stock}`)
     } else {
       res.status(400).send('ID de produto inválido');
     } 

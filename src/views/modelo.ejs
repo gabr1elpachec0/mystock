@@ -7,6 +7,13 @@
   <body style="margin-bottom: 5%">
     <%- include('navbar-logado') %>
     <div class="container mt-5" style="margin-right: auto; margin-left: auto">
+      <% if(product_success) { %>
+            <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
+                <p>
+                    <%= product_success %>
+                </p>
+            </div>
+        <% } %>
       <% if(product_update) { %>
             <div class="alert alert-success mt-5" style="margin-left: auto; margin-right: auto; height: 55px; width: 500px;">
                 <p>
@@ -28,6 +35,20 @@
             style="background-color: black"
           >
             Adicionar Produto
+          </button>          
+        </a>
+        <a
+          class="fw-bold mx-3"
+          aria-current="page"
+          href="/estoques"
+          style="color: black;"
+        >
+          <button
+            type="button"
+            class="btn btn-dark"
+            style="background-color: black"
+          >
+            Voltar para Estoques
           </button>          
         </a>
       </div>
@@ -77,7 +98,7 @@
                   <div class="d-flex" style="align-items: center">
                     Valor Unitário
                     <div style="margin-left: auto; margin-right: 0">
-                      R$ <%= produto.valor.toFixed(2) %>,00
+                      R$ <%= produto.valor.toFixed(2) %>
                     </div>
                   </div>
                 </li>
@@ -85,7 +106,7 @@
                   <div class="d-flex" style="align-items: center">
                     Valor Total
                     <div style="margin-left: auto; margin-right: 0">
-                      R$ <%= (produto.valor * produto.quantidade).toFixed(2) %>,00
+                      R$ <%= (produto.valor * produto.quantidade).toFixed(2) %>
                     </div>
                   </div>
                 </li>
@@ -135,7 +156,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: black"
-            >R$ <%= valor_estoque.toFixed(2) %>,00</a
+            >R$ <%= valor_estoque.toFixed(2) %></a
           >
         </div>
         <div class="navbar-nav">
@@ -149,7 +170,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: darkred"
-            >R$ <%= investimento.toFixed(2) %>,00</a
+            >R$ <%= investimento.toFixed(2) %></a
           >
         </div>
         <div class="navbar-nav">
@@ -163,7 +184,7 @@
             class="nav-link fw-bold m-2"
             aria-current="page"
             style="color: darkgreen"
-            >R$ <%= (valor_estoque - investimento).toFixed(2) %>,00</a
+            >R$ <%= (valor_estoque - investimento).toFixed(2) %></a
           >
         </div>
       </div>
