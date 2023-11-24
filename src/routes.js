@@ -43,7 +43,7 @@ router.post('/editaProduto/:id', ProductController.updateProduct)
 router.get('/excluiProduto/:id', ProductController.deleteProduct)
 
 // Supplier routes
-router.get('/addForn', SupplierController.getCreateSupplierForm)
+router.get('/addForn/:id', SupplierController.getCreateSupplierForm)
 router.post('/addForn', SupplierController.createSupplier)
 
 // Movement routes

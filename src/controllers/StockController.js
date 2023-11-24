@@ -8,18 +8,11 @@ module.exports = {
   // Get Stocks
   async getStocks(req, res) {
     var estoque_success
-    var forn_success
 
     if (req.session.estoque_success) {
       estoque_success = req.session.estoque_success
       req.session.estoque_success = ""
     }
-
-    if (req.session.forn_success) {
-      forn_success = req.session.forn_success
-      req.session.forn_success = ""
-    }
-    
 
     if (req.session.logado === true) {
       const userId = req.session.userId
@@ -76,7 +69,6 @@ module.exports = {
           estoques: findStocksByUserId,
           categorias: findCategories,
           estoque_success: estoque_success,
-          forn_success: forn_success,
           counter: counter
         });
     } else {
