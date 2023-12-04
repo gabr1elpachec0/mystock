@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:ga180705@localhost:3306/mystock"
 }
 
 // Tabelas
@@ -83,3 +83,4 @@ model Categoria {
 
   Estoque_Categoria Estoque[]
 }
+
