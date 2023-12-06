@@ -276,6 +276,21 @@ module.exports = {
     const stockId = parseInt(req.params.id)
 
     if(!isNaN(stockId)) {
+
+      const findProductsByStockId = await prisma.produto.findMany({
+        where: {
+          id_stock: stockId
+        }
+      })
+
+      for (let j = 0; j < findProductsByStockId.length; j++) {
+        await prisma.movimentacao_Produto.deleteMany({
+          where: {
+            id_produto: findProductsByStockId[j].id_prod
+          }
+        })
+      }
+
       await prisma.produto.deleteMany({
         where: {
           id_stock: stockId
