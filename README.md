@@ -1,6 +1,6 @@
 <h1 slign='center' style='font-weight: bold'>Aplicação MyStock</h1>
 
-<p>
+<p align='center'>
   <a href='#tech'>Technologies</a>  
 </p>
 
@@ -10,10 +10,10 @@
 
 <h2 id="tech">💻 Technologies</h2>
 
-1. ``EJS`
+1. ``EJS``
 2. ``BOOTSTRAP``
 3. ``NODEJS``
 4. ``JAVASCRIPT``
 5. ``MYSQL``
-6. ``EXPRESS`
+6. ``EXPRESS``
 7. ``PRISMA ORM``
